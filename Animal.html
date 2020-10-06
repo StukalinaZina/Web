@@ -1,0 +1,135 @@
+<meta charset="utf-8">
+<script>
+	class Animal {
+		constructor (name) {
+			this.name = name;
+			this.state = 1; // 1 - если живое и 0 - если мёртвое
+			this.sound = " "; // что-то, что говорит животное
+			this.isSleeping = false; // false - если не спит и true - если спит
+			this.isHungry = false; // false - если не голодно и true - если голодно
+			this.endurance = 0; // выносливость чтобы бегать
+			this.satiety = 0; // сытость чтобы наесться
+			}
+			
+		sleep(time){
+			if(this.state === 1) {
+				if (this.isSleeping === false){
+					this.isSleeping = true;
+				}
+				while (this.satiety > 0 & time != 0) {
+					this.endurance ++; // выносливость восстанавливается когда животное спит
+					this.satiety --; // сытость уменьшается
+					time --; // уменьшается количество часов сна
+				}
+				if (this.satiety === 0) {
+					this.isSleeping = false;
+					this.isHungry = true;
+					console.log("%s's hungry", this.name);
+					return;
+				}
+				return;
+			}
+			else {
+				console.log("%s's dead", this.name);
+				return;
+			}
+		}
+		eat(smth){
+			if(this.state === 1) {
+				if (this.isHungry === true) {
+					if (this.isSleeping === true) {
+						this.isSleeping = false;
+					}
+					this.satiety += smth; // наедается
+				}
+				else {
+					console.log ("%s's not hungry", this.name);
+					return;
+				}
+				return;
+			}
+			else {
+				console.log("%s's dead", this.name);
+				return;
+			}
+		}
+		
+		run(time){
+			if(this.state === 1) {
+				if (this.isSleeping === true) {
+					this.isSleeping = false;
+				}
+				while (this.satiety > 0 & this.endurance > 0 & time > 0) {
+					this.satiety --; //уменьшается сытость
+					this.endurance --; //уменьшается выносливость
+					time --; // уменьшается количество оставшегося времени бега
+				}
+				if (this.endurance === 0) {
+					console.log("%s's tired, get it some sleep", this.name);
+					return;
+				}
+				if (this.satiety === 0) {
+					this.isHungry = true;
+					console.log("%s won't run, it's hungry!", this.name)
+					return;
+				}
+				return;
+			}
+			else {
+				console.log("%s's dead", this.name);
+				return;
+			}
+		}
+		speak(){
+			if(this.state === 1) {
+				if (this.isSleeping === true) {
+					this.isSleeping = false;
+				}
+				console.log(this.sound);
+				return;
+			}
+			else {
+				console.log("%s's dead", this.name);
+				return;
+			}	
+		}
+			
+	}
+	
+	class Dog extends Animal{
+		constructor(name){
+			super(name);
+			this.state = 1; 
+			this.sound = "Wof! Wof!"; 
+			this.isSleeping = false; 
+			this.isHungry = false; 
+			this.endurance = 12; 
+			this.satiety = 15;  
+		}
+	}
+	class Cat extends Animal{
+		constructor(name){
+			super(name);
+			this.state = 1; 
+			this.sound = "May...mrrr?"; 
+			this.isSleeping = false; 
+			this.isHungry = false; 
+			this.endurance = 8; 
+			this.satiety = 13;  
+		}
+	}
+	
+	let dog = new Dog("Jerry");
+	let cat = new Cat("Fluffy");
+	
+	dog.run(14);
+	dog.sleep(8);
+	dog.eat(11);
+	dog.speak;
+	
+	cat.speak;
+	cat.eat(21);
+	cat.sleep(8);
+	cat.run(3);
+	
+</script>
