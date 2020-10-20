@@ -1,0 +1,41 @@
+<script>
+'use strict';
+
+async function get_line1(str){
+     str = str + 'alfa';
+     return str;
+}
+
+async function get_line2(str){
+    str = str + 'beta';
+    return str; 
+}
+
+(async () => {
+	let response = await fetch('test.txt');
+	let text = await response.text(); 
+	console.log(text);
+
+	let timer1 = setInterval(() => {
+		get_line1(text).then(result => {
+			text = result;
+		});   
+		console.log('tick - %s', text);
+	}, 12);
+
+	let timer2 = setInterval(() => {
+		get_line2(text).then(result => {
+			text = result;
+		});
+		console.log('tack - %s', text);
+
+	}, 15);
+
+	setTimeout(() => { 
+		clearInterval(timer1); 
+		clearInterval(timer2);
+		console.log('stop'); 
+	}, 40);
+})()
+
+</script>
