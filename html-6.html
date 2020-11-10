@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html>
+<style>
+img {margin-left: 600px;
+	width: 300px;
+	height: 300px;
+}
+table {border: 2px solid DarkSlateGray;
+	margin-left: auto; 
+	margin-right: auto;
+	width: 400px;
+	background-color: LightSlateGray;	
+} 
+td {border: 2px solid DarkSlateGray;
+	padding: 30px;
+	margin-left: auto; 
+	margin-right: auto;
+	color: Gold;
+	font: 50px Arial;
+}
+div {margin-left: 555px;
+	margin-right: 530px;
+	font: 30px Italic Arial;
+}
+input {font: 30px Arial;
+	margin: 10px;
+}
+</style>
+
+<body>
+	<img src = "https://st2.depositphotos.com/1041273/5784/v/450/depositphotos_57844367-stock-illustration-stopwatch-icon.jpg" id = "imageCh">
+	<br>
+	<h1 id = "custom"> Секундомер </h1>
+	<table id = "stTable">
+		<td id = "stTableH"> 0 </td>
+		<td id = "stTableM"> 0 </td>
+		<td id = "stTableS"> 0 </td>
+	</table>
+	<br>
+	<table id = "endTable">
+		<td id = "endTableH"> 0 </td>
+		<td id = "endTableM"> 0 </td>
+		<td id = "endTableS"> 0 </td>
+	</table>
+	<input id = "image" type = "button" value = "Сменить картинку">
+	<input id = "stopM" type = "button" value = "Не считать" onclick = "clearInterval(timerId)">
+	<br>
+	<br>
+	<div>
+		<input id = "startButton" type = "button" value = "СТАРТ">
+		<input id = "pauseButton" type = "button" value = "ПАУЗА">
+		<input id = "stopButton" type = "button" value = "СТОП">
+	</div>
+	<br>
+	<input id = "deleting" type = "button" value = "Очистить">
+	<br>
+	<div id = "story">
+	</div>
+	<script>
+		let timing = document.getElementById('startButton');
+		let pausing = document.getElementById('pauseButton');
+		let stopping = document.getElementById('stopButton');
+		let startCheck = false;
+		let stopCheck = true;
+		
+		let pCustom = document.getElementById('custom');
+		pressStart = new CustomEvent("timer", {detail: { phrase: "Считаем время" }});
+		pCustom.addEventListener("timer", function(event) {
+			alert(event.detail.phrase);
+		});
+		let timerId = setInterval(() => custom.dispatchEvent(pressStart), 10000); 
+		
+		let pChange = document.getElementById('image');
+		let pic = "https://izm.by/image/cache/catalog/izmby_product/p70000031.pic01-850x850.jpg";
+		pChange.addEventListener("click", function(event) {
+			let pChangeImg = document.getElementById('imageCh');
+			let z = pChangeImg.src;
+			pChangeImg.src = pic;
+			pic = z;
+		}, {passive: true});
+		
+		let pStory = document.getElementById('story');
+		timing.addEventListener("click", e => {
+			if (stopCheck = true) {
+				let newP = document.createElement("p");
+				var x = new Date();
+				newP.innerHTML = x.getHours() + ":" + x.getMinutes() + ":" + x.getSeconds();
+				pStory.appendChild(newP);
+				document.getElementById('stTableH').innerHTML = x.getHours();
+				document.getElementById('stTableM').innerHTML = x.getMinutes();
+				document.getElementById('stTableS').innerHTML = x.getSeconds();
+				startCheck = true;
+				stopCheck = false;				
+			}
+		});
+		
+		pausing.addEventListener("click", e => {
+			let newP = document.createElement("p");
+			var x = new Date();
+			newP.innerHTML = x.getHours() + ":" + x.getMinutes() + ":" + x.getSeconds();
+			pStory.appendChild(newP);
+			document.getElementById('endTableH').innerHTML = x.getHours();
+			document.getElementById('endTableM').innerHTML = x.getMinutes();
+			document.getElementById('endTableS').innerHTML = x.getSeconds();
+		}, {once:true});
+		
+		stopping.addEventListener("click", e => {
+			if (startCheck === true) {
+				let newP = document.createElement("p");
+				var x = new Date();
+				newP.innerHTML = x.getHours() + ":" + x.getMinutes() + ":" + x.getSeconds();
+				pStory.appendChild(newP);
+				document.getElementById('endTableH').innerHTML = x.getHours();
+				document.getElementById('endTableM').innerHTML = x.getMinutes();
+				document.getElementById('endTableS').innerHTML = x.getSeconds();
+				stopCheck = true;
+				startCheck = false;
+			}
+		}, {capture:true});
+		
+		let pClear = document.getElementById('deleting');
+		pClear.onclick = function(e) {
+			while (pStory.firstChild) {
+				pStory.removeChild(pStory.firstChild);
+			}
+		};
+	</script>
+</body>
+</html>
