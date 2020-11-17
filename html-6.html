@@ -22,6 +22,10 @@ div {margin-left: 555px;
 	margin-right: 530px;
 	font: 30px Italic Arial;
 }
+#check {margin-left: 555px;
+		margin-right: 530px;
+		font: 15px Italic Arial;
+}
 input {font: 30px Arial;
 	margin: 10px;
 }
@@ -46,21 +50,29 @@ input {font: 30px Arial;
 	<input id = "stopM" type = "button" value = "Не считать" onclick = "clearInterval(timerId)">
 	<br>
 	<br>
-	<div>
+	<div id = "buttons">
 		<input id = "startButton" type = "button" value = "СТАРТ">
-		<input id = "pauseButton" type = "button" value = "ПАУЗА">
-		<input id = "stopButton" type = "button" value = "СТОП">
+		<input id = "pauseButton" type = "button" value = "ПАУЗА" onclick = "event.stopPropagation()">
+		<input id = "stopButton" type = "button" value = "СТОП"> 
+		<label for = "startButton"> Start </label>
+		<label for = "pauseButton"> Pause </label>
+		<label for = "stopButton"> Stop </label>
 	</div>
 	<br>
 	<input id = "deleting" type = "button" value = "Очистить">
 	<br>
 	<div id = "story">
 	</div>
-	
+	<br>
+	<div id = "check">
+	</div>
 	<script>
+		let divButtons = document.getElementById('buttons');
 		let timing = document.getElementById('startButton');
 		let pausing = document.getElementById('pauseButton');
 		let stopping = document.getElementById('stopButton');
+		let pStory = document.getElementById('story');
+		let pCheck = document.getElementById('check');
 		let startCheck = false;
 		let stopCheck = true;
 		
@@ -68,6 +80,9 @@ input {font: 30px Arial;
 		pressStart = new CustomEvent("timer", {detail: { phrase: "Считаем время" }});
 		pCustom.addEventListener("timer", function(event) {
 			alert(event.detail.phrase);
+			let newCheck = document.createElement("p"); 
+			newCheck.innerHTML = "поймано на " + this.tagName + ". событие, предназначенное для " + event.target.tagName;
+			pCheck.appendChild(newCheck);
 		});
 		let timerId = setInterval(() => custom.dispatchEvent(pressStart), 10000); 
 		
@@ -78,10 +93,27 @@ input {font: 30px Arial;
 			let z = pChangeImg.src;
 			pChangeImg.src = pic;
 			pic = z;
+			this.tagName = "change";
+			let newCheck = document.createElement("p"); 
+			newCheck.innerHTML = "поймано на " + this.tagName + ". событие, предназначенное для " + event.target.tagName + ". являющееся passive";
+			pCheck.appendChild(newCheck);
 		}, {passive: true});
+
+		divButtons.onclick = function(event) {
+			let newCheck = document.createElement("p"); 
+			newCheck.innerHTML = "поймано на " + this.tagName + ". событие, предназначенное для " + event.target.tagName + ".";
+			pCheck.appendChild(newCheck);
+		}
 		
-		let pStory = document.getElementById('story');
+		timing.addEventListener("mouseover", e => {
+			this.tagName = "buttons.timing.mouseover";
+			let newCheck = document.createElement("p"); 
+			newCheck.innerHTML = "поймано на " + this.tagName + ". событие, предназначенное для " + e.target.tagName + ".";
+			pCheck.appendChild(newCheck);
+		});
+		
 		timing.addEventListener("click", e => {
+			this.tagName = "buttons.timing.click";
 			if (stopCheck = true) {
 				let newP = document.createElement("p");
 				var x = new Date();
@@ -91,11 +123,22 @@ input {font: 30px Arial;
 				document.getElementById('stTableM').innerHTML = x.getMinutes();
 				document.getElementById('stTableS').innerHTML = x.getSeconds();
 				startCheck = true;
-				stopCheck = false;				
+				stopCheck = false;
+				let newCheck = document.createElement("p"); 
+				newCheck.innerHTML = "поймано на " + this.tagName + ". событие, предназначенное для " + e.target.tagName + ". являющееся capture";
+				pCheck.appendChild(newCheck);
 			}
-		});
+		}, {capture:true});
 		
+		pausing.addEventListener("mouseover", e => {
+			this.tagName = "buttons.pausing.mouseover";
+			let newCheck = document.createElement("p"); 
+			newCheck.innerHTML = "поймано на " + this.tagName + ". событие, предназначенное для " + e.target.tagName + ".";
+			pCheck.appendChild(newCheck);
+		});	
+			
 		pausing.addEventListener("click", e => {
+			this.tagName = "buttons.pausing.click";
 			let newP = document.createElement("p");
 			var x = new Date();
 			newP.innerHTML = x.getHours() + ":" + x.getMinutes() + ":" + x.getSeconds();
@@ -103,9 +146,22 @@ input {font: 30px Arial;
 			document.getElementById('endTableH').innerHTML = x.getHours();
 			document.getElementById('endTableM').innerHTML = x.getMinutes();
 			document.getElementById('endTableS').innerHTML = x.getSeconds();
-		}, {once:true});
+			let newCheck = document.createElement("p"); 
+			newCheck.innerHTML = "поймано на " + this.tagName + ". событие, предназначенное для " + e.target.tagName + ". являющееся capture";
+			pCheck.appendChild(newCheck);
+		}, {capture: true});
 		
+		function stopDefAction(evt) {
+			evt.preventDefault();			
+			let newCheck = document.createElement("p"); 
+			newCheck.innerHTML = "поймано на prevDef. событие, предназначенное для " + evt.target.tagName + ".";
+			pCheck.appendChild(newCheck);
+			
+		}
+		pausing.addEventListener("click", stopDefAction, false);
+
 		stopping.addEventListener("click", e => {
+			this.tagName = "buttons.stopping.click";
 			if (startCheck === true) {
 				let newP = document.createElement("p");
 				var x = new Date();
@@ -116,6 +172,9 @@ input {font: 30px Arial;
 				document.getElementById('endTableS').innerHTML = x.getSeconds();
 				stopCheck = true;
 				startCheck = false;
+				let newCheck = document.createElement("p"); 
+				newCheck.innerHTML = "поймано на " + this.tagName + ". событие, предназначенное для " + e.target.tagName + ". являющееся capture";
+				pCheck.appendChild(newCheck);
 			}
 		}, {capture:true});
 		
@@ -123,6 +182,9 @@ input {font: 30px Arial;
 		pClear.onclick = function(e) {
 			while (pStory.firstChild) {
 				pStory.removeChild(pStory.firstChild);
+			}
+			while (pCheck.firstChild) {
+				pCheck.removeChild(pCheck.firstChild);
 			}
 		};
 	</script>
