@@ -6,7 +6,7 @@ let newP2 = document.createElement("p");
 newP2.innerHTML = "Occasion ms " + String(this);
 document.body.appendChild(newP2);
 
-let w1 = new Worker("worker.js"); // Исправляйте и будет работать
+let w1 = new Worker("worker.js"); 
 w1.postMessage([4]);
 w1.addEventListener("message",(event) => {
     let newP3 = document.createElement("p");
