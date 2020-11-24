@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+</head>	
+<body>
+	<script type="module">
+		import occasion from "./occasion.js";
+		
+		let newP = document.createElement("p");
+		newP.innerHTML = occasion.call(self);
+		document.body.appendChild(newP);
+		
+		import("./myscript1.js").then(loadmodule => {
+			let newP = document.createElement("p");
+			newP.innerHTML = loadmodule.default();
+			document.body.appendChild(newP);
+		});   
+    </script>
+	<img src = "https://cdn-media-1.freecodecamp.org/images/-TZuLkY4dl1q3ngPdl3bAy-95GDku8xF105H">
+	<br>
+	<input id = "timer" type = "button" value = "Time to work"> 
+</body>
+</html> 
