@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+</head>	
+<body>
+	<script>
+		let el = document.createElement('script');
+		el.src = "myscript.js";
+    
+		el.addEventListener("load", function(event) {
+			let newP = document.createElement("p");
+			newP.innerHTML = "Occasion " + String(this);
+			document.body.appendChild(newP);
+		});  
+		document.head.appendChild(el);
+	</script>
+	<img src = "https://cdn-media-1.freecodecamp.org/images/-TZuLkY4dl1q3ngPdl3bAy-95GDku8xF105H">
+	<br>
+	<input id = "timer" type = "button" value = "Time to work"> 
+</body>
+</html> 
