@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+   <script>
+	document.addEventListener("DOMContentLoaded", function() {
+		function getCookie(name) {
+			let match1 = document.cookie.match(new RegExp(
+				"(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+			));
+			return match1 ? decodeURIComponent(match1[1]) : undefined;
+		}
+		let newH = document.createElement("h1");
+		newH.innerHTML = "Hello, " + getCookie("userID");
+		document.body.before(newH);
+
+		let conf = document.getElementById("button");
+		let question_elem = document.getElementById('question');
+		conf.addEventListener("click",()=>{
+			localStorage.setItem("ans_text", question_elem.value);
+		})
+  
+		let answer = localStorage.getItem("ans_text");
+		if(answer){
+			question_elem.value = answer;
+		}
+	},false);
+	</script>
+	
+	<body>
+		<form action = "/getcookie">
+			<p>Enter something<p>
+			<p><input id = "question" type = "text"/></p>
+			<p><input id = "button" type = "submit" value = "Next"/></p>
+		</form>
+	</body>
+</html>

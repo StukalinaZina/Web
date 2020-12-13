@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<style>
+	h4 {font-size: 18px}
+	p {color:red}
+	</style>
+	<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		let que_elem = document.getElementById("que");
+		let newP = document.createElement("p");
+		newP.innerHTML = localStorage.getItem("ans_text");
+		que_elem.after(newP);
+
+		let conf = document.getElementById("button");
+		conf.addEventListener("click",()=>{
+            localStorage.removeItem("ans_text");
+        })
+	},false);
+	</script>
+	
+	<body>
+		<form action = "/index">
+			<input type = "submit" value = "Go to previous page"/>
+		</form>
+		<h4 id = "que">That's what you entered:</h4>
+		<form action = "/finish">
+			<input id = "button" type = "submit" value = "Finish"/>
+		</form>
+	</body>
+</html>
