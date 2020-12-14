@@ -30,14 +30,38 @@
 					<path d = "M 145 280 L 120 280 L 143 240 H 123 L 150 200 L 177 240 H 157 L 180 280 Z stroke = "green" fill = "#26972D"/> 
 					<path d = "M 150 200 C 130 110, 120 110, 130 70 S 158 50, 167 80 stroke = "black" fill = "yellow"/>
 				</g>
-				<g>
-					<circle id = "myCyrcle" cx ="250" cy ="250" r = "10" stroke = "#FFAA00" />
-					<use href = "#myCyrcle" x = "210" fill = "#FF4E40"/>
-				</g>
 			</svg>
 		</section>
 		<section>
-
+			<svg viewBox = "0 0 30 10" xmlns = "http://www.w3.org/2000/svg">
+				<defs>
+					<linearGradient id = "L_gr1">
+						<stop offset = 0% stop-color = "#94005D"/>
+						<stop offset = 20% stop-color = "#9C2752" />
+						<stop offset = 40% stop-color = "#890738" stop-opacity = "0.5"/>
+						<stop offset = 60% stop-color = "#C31019" stop-opacity = "0.8"/>
+						<stop offset = 80% stop-color = "#C63F11"/>
+						<stop offset = 100% stop-color = "#E38618"/>
+					</linearGradient>
+					<linearGradient id = "L_gr2">
+						<stop class = "stop1" offset = "0%"/>
+						<stop class = "stop2" offset = "30%"/>
+						<stop class = "stop3" offset = "50%"/>
+						<stop class = "stop4" offset = "70%"/>
+						<stop class = "stop5" offset = "100%"/>
+					</linearGradient>
+					<style type = "text/css"><![CDATA[
+					.stop1 {stop-color: #080540;}
+					.stop2 { stop-color: #110C67; stop-opacity = "0.5"}
+					.stop3 { stop-color: #337DAD;}
+					.stop4 { stop-color: #2CAD94;}
+					.stop5 {stop-color: #3CBA2F; stop-opacity = "0.5"}
+					]]></style>
+				</defs>
+				<circle id = "myCircle" cx = "5" cy = "5" r = "4" stroke = "#772F9E" stroke-width = "1px"/>
+				<use href = "#myCircle" x = "9" fill = "url(#L_gr1)"/>
+				<use href = "#myCircle" x = "18" fill = "url(#L_gr2)"/>
+			</svg>
 		</section>
 	</div>
 	<div style = "left:0%">
