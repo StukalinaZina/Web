@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<head>
+    <title> Image </title>
+    <style>
+		div {position:absolute;
+			width:33%;
+			height:100%;
+			z-index:0;
+		}
+		section {position: relative;
+			width:100%;
+			height:50%;
+			z-index:1;
+		}
+        img { position: relative;
+          width:380px; 
+          height:380px;
+		  z-index:2;
+        }	
+    </style>
+</head>
+
+<body id = "body">
+	<div style = "left:33%">
+		<section>
+			<svg version = "1.1" width = "300" height = "300" id = "yolka" viewBox="0 0 100% 100%" xmlns="http://www.w3.org/2000/svg" style = "position:absolute; z-index: 0;">
+				<g id = "paths">
+					<path d = "M 145 300 V 280 H 155 V 300 H 145 strock = "brown" fill = "brown"/>
+					<path d = "M 145 280 L 120 280 L 143 240 H 123 L 150 200 L 177 240 H 157 L 180 280 Z stroke = "green" fill = "#26972D"/> 
+					<path d = "M 150 200 C 130 110, 120 110, 130 70 S 158 50, 167 80 stroke = "black" fill = "yellow"/>
+				</g>
+				<g>
+					<circle id = "myCyrcle" cx ="250" cy ="250" r = "10" stroke = "#FFAA00" />
+					<use href = "#myCyrcle" x = "210" fill = "#FF4E40"/>
+				</g>
+			</svg>
+		</section>
+		<section>
+
+		</section>
+	</div>
+	<div style = "left:0%">
+		<section id = "mouse">
+			<img src = "https://storage.vsemayki.ru/images/0/1/1593/1593411/previews/people_2_magnet_poster_3x3_front_white_500.jpg" width = "380px" height = "380px" alt = "not-existing">
+		</section>	
+		<section style = "background-color:#E567B1; opacity: 0.2;">
+			<img src = "not_exist.jpg" alt = "not-existing">
+		</section>
+	</div>
+	<div style = "right:0%">
+		<section>
+			<svg width = "500" height = "380" viewBox = "0 0 506 394">
+				<filter id = "erode">
+					<feMorphology operator = "erode" radius = "8"></feMorphology>
+				</filter>
+				<image xlink:href="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Farbkreis_Itten_1961.svg/1200px-Farbkreis_Itten_1961.svg.png" width = "90%" height = "90%" x = "10" y = "10" filter = "url(#erode)"></image>
+			</svg>
+		</section>
+		<section>
+			<img src="https://mlodytechnik.pl/i/images/6/2/1/dz04NzkmaD04Mzc=_src_16621-1.1-Addytywne-mieszanie-kolorow.jpg" alt = "not-existing" style = "filter:url(#erode)">
+		</section>
+	</div>
+</body>
+</html>
